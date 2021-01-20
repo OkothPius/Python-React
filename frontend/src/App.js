@@ -1,59 +1,92 @@
 import React, { Component } from "react"
 import Modal from "./components/Modal";
+import axios from "axios";
 
-const todoItems = [
-  {
-    id: 1,
-    title: "Go to the market",
-    description: "Buy ingredients to buy supper",
-    completed: true
-  },
+// const todoItems = [
+//   {
+//     id: 1,
+//     title: "Go to the market",
+//     description: "Buy ingredients to buy supper",
+//     completed: true
+//   },
 
-  {
-    id: 2,
-    title: "Study",
-    description: "Read algebra and history books about the coming test",
-    completed: true
-  },
+//   {
+//     id: 2,
+//     title: "Study",
+//     description: "Read algebra and history books about the coming test",
+//     completed: true
+//   },
 
-  {
-    id: 3,
-    title: "Sally's Book",
-    description: "Go to the library to rent Sally's books",
-    completed: true
-  },
+//   {
+//     id: 3,
+//     title: "Sally's Book",
+//     description: "Go to the library to rent Sally's books",
+//     completed: true
+//   },
 
-  {
-    id: 4,
-    title: "Article",
-    description: "Write article on how to use django and react",
-    completed: false
-  }
-];
+//   {
+//     id: 4,
+//     title: "Article",
+//     description: "Write article on how to use django and react",
+//     completed: false
+//   }
+// ];
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       viewCompleted: false,
-      todoList: todoItems
+      activeItem: {
+        title: "",
+        description: "",
+        completed: false
+      },
+      todoList: []
     };
   }
+  componentDidMount() {
+    this.refreshList();
+  }
+  //Rendering the backend data to frontend
+  refreshList = () => {
+    axios
+      .get("http://localhost:8000/api/todos/")
+      .then(res => this.setState({ todoList: res.data}))
+      .catch(err => console.log(err));
+  };
 
   toggle = () => {
     this.setState({ modal: !this.state.modal });
   };
+
+  //Responsible for saving the task
   handleSubmit = item => {
     this.toggle();
-    alert("save" + JSON.stringify(item));
+    if (item.id) {
+      axios
+        .put(`http://localhost:8000/api/todos/${item.id}/`, item)
+        .then(res => this.refreshList());
+      return;  
+    }
+    axios
+      .post("http://localhost:8000/api/todos/", item)
+      .then(res => this.refreshList())
   };
+
+  //deleting the task
   handleDelete = item => {
-    alert("delete" + JSON.stringify(item))
-  }
+    axios
+      .delete(`http://localhost:8000/api/todos/${item.id}/`, item)
+      .then(res => this.refreshList());
+  };
+  
+  //Create an item
   createItem = () => {
     const item = {title: "", description: "", completed: false };
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
+  //Edit an item
   editItem = item => {
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
