@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/OkothPius/React-todo-app/issues"
   },
-  "homepage": "https://github.com/OkothPius/React-todo-app#readme"
+  "homepage": "https://github.com/OkothPius/React-todo-app#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
