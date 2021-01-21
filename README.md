@@ -29,6 +29,10 @@ $ cd frontend
 $ npm install
 $ npm start
 ```
+# Build with
+* [Python](https://www.python.org/)A programming language that lets you work quickly and integrate systems more effectively.
+* [React](https://reactjs.org/) A progressive javascript language
+* [Django](https://www.djangoproject.com/) Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
