@@ -2,39 +2,10 @@ import React, { Component } from "react"
 import Modal from "./components/Modal";
 import axios from "axios";
 
-// const todoItems = [
-//   {
-//     id: 1,
-//     title: "Go to the market",
-//     description: "Buy ingredients to buy supper",
-//     completed: true
-//   },
-
-//   {
-//     id: 2,
-//     title: "Study",
-//     description: "Read algebra and history books about the coming test",
-//     completed: true
-//   },
-
-//   {
-//     id: 3,
-//     title: "Sally's Book",
-//     description: "Go to the library to rent Sally's books",
-//     completed: true
-//   },
-
-//   {
-//     id: 4,
-//     title: "Article",
-//     description: "Write article on how to use django and react",
-//     completed: false
-//   }
-// ];
-
 class App extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       viewCompleted: false,
       activeItem: {
